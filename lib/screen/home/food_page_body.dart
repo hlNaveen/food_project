@@ -83,8 +83,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   children: [
 
                     Container(
-                      width:Dimensions.listviewImgSize,height: Dimensions.listviewImgSize,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.radius20), color: Colors.white,
+                      width:Dimensions.listviewImgSize,
+                      height: Dimensions.listviewImgSize,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                            Dimensions.radius20), color: Colors.white,
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage("assets/images/chicken-rice.jpg")
