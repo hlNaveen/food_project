@@ -7,10 +7,6 @@ import 'package:food_app/widgets/expanable_text_widget.dart';
 import '../../utility/dimention.dart';
 import '../../widgets/app_icon.dart';
 
-main(){
-  runApp(TodayFoodDetail());
-}
-
 class TodayFoodDetail extends StatelessWidget {
   const TodayFoodDetail({Key? key}) : super(key: key);
 

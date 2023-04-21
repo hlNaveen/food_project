@@ -1,13 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import '../../widgets/dialogwidgetadduser.dart';
 
-main(){
-  runApp(MaterialApp(
-    home: Top(),
-  ));
-}
-
-class Top extends StatelessWidget {
+class Admin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

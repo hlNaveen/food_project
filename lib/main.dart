@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/screen/admin/adminhome.dart';
+import 'package:food_app/screen/food/today_food_detail.dart';
 import 'package:food_app/screen/home/main_food_page.dart';
 import 'package:get/get.dart';
 
@@ -17,11 +19,12 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
 
-      home: const MainFoodPage(),
+      home: TodayFoodDetail(),
     );
   }
 }
