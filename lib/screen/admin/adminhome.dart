@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 main(){
@@ -44,12 +43,33 @@ class Top extends StatelessWidget {
                   height: 50,
                 ),
                 ListTile(
-                  leading: Text('Create New Admin Account',style: TextStyle(fontSize: 18,color: Colors.white)),
+                  leading: OutlinedButton(
+                    onPressed: (){
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context){
+                            return MyDialog();
+                          }
+                      );
+                    },
+                    child: Text('Create New Admin Account',style: TextStyle(fontSize: 18,color: Colors.white),),
+                    style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+                        side: MaterialStateProperty.all(BorderSide.none)
+                    ),
+                  ),
                   trailing: Icon(Icons.add_box_rounded,size: 40,),
                   onTap: (){},
                 ),
                 ListTile(
-                  leading: Text('Update Password',style: TextStyle(fontSize: 18,color: Colors.white)),
+                  leading: OutlinedButton(
+                    onPressed: (){},
+                    child: Text('Update Password',style: TextStyle(fontSize: 18,color: Colors.white),),
+                    style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+                        side: MaterialStateProperty.all(BorderSide.none)
+                    ),
+                  ),
                   trailing: Icon(Icons.password_outlined,size: 40,),
                   onTap: (){},
                 )
