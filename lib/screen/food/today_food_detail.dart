@@ -113,7 +113,8 @@ class TodayFoodDetail extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, left: Dimensions.width10,right: Dimensions.width10),
-              child: BigText(text: "\Rs.45 | Add to cart", color: Colors.white,),
+
+              child: BigText(text: "\Rs.450 | Add to cart", color: Colors.white,),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular((Dimensions.radius20),),
                 color: Colors.green,
