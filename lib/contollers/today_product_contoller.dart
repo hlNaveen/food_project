@@ -3,25 +3,28 @@ import 'package:get/get.dart';
 
 import '../model/today_product_model.dart';
 
-class TodayProductController extends GetxService{
+class TodayProductController extends GetxController {
   final TodayProductRep todayProductRep;
   TodayProductController({required this.todayProductRep});
-  List<dynamic> _todayProductList=[];
-  List<dynamic> get todayroductList => _todayProductList;
+  List<ProductModel> _todayProductList=[];
+  List<ProductModel> get todayProductList => _todayProductList;
 
-  Future<void> getPopularProduct()async{
+  bool _isLoaded = false;
+  bool get isLoaded =>_isLoaded;
+
+  Future<void> getTodayProductList()async{
     Response response = await todayProductRep.getTodayProductList();
     if(response.statusCode==200){
 
+      print("got products");
       _todayProductList=[];
       _todayProductList.addAll(Product.fromJson(response.body).products);
-      print(_todayProductList);
+      //print(_todayProductList);
+      _isLoaded=true;
       update();
     }else{
 
     }
   }
-
-  void update() {}
 
 }

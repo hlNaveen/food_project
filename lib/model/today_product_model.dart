@@ -31,14 +31,14 @@ class ProductModel{
   String? description;
   int? price;
   int? stars;
-  String? image;
+  String? img;
   String? createAt;
   String? updateAt;
   int? typeId;
 
   ProductModel(
   {
-    this.id, this.name, this.description, this.price, this.stars, this.image , this.createAt, this.updateAt, this.typeId});
+    this.id, this.name, this.description, this.price, this.stars, this.img , this.createAt, this.updateAt, this.typeId});
 
   ProductModel.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -46,7 +46,7 @@ class ProductModel{
     description = json['description'];
     price = json['price'];
     stars = json['stars'];
-    image = json['image'];
+    img = json['image'];
     createAt = json['craete_at'];
     updateAt = json['update_at'];
     typeId = json['type_id'];

@@ -1,17 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/utility/app_constants.dart';
 import 'package:food_app/widgets/app_column.dart';
 import 'package:food_app/widgets/big_text.dart';
 import 'package:food_app/widgets/expanable_text_widget.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../../contollers/today_product_contoller.dart';
 import '../../utility/dimention.dart';
 import '../../widgets/app_icon.dart';
+import '../home/main_food_page.dart';
 
 class TodayFoodDetail extends StatelessWidget {
-  const TodayFoodDetail({Key? key}) : super(key: key);
+  int pageId;
+  TodayFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product= Get.find<TodayProductController>().todayProductList[pageId];
+    //print('page id is'+pageId,toString());
+    //print("product name is"+product.name.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -26,8 +35,9 @@ class TodayFoodDetail extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(
-                        "assets/images/fried-rice.jpeg"),
+                    image: NetworkImage(
+                      AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!
+                    )
 
                   )),
             ),
@@ -40,7 +50,13 @@ class TodayFoodDetail extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppIcon(icon:Icons.arrow_back_rounded),
+                  GestureDetector(
+                    onTap:(){
+                      Get.to(()=>MainFoodPage());
+
+          },
+                      child:
+                  AppIcon(icon:Icons.arrow_back_rounded)),
                   AppIcon(icon:Icons.shopping_cart_outlined),
                 ],
               )),
@@ -66,15 +82,14 @@ class TodayFoodDetail extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppColumn(text: "Fried Rice"),
+                  AppColumn(text:product.name!),
                   SizedBox(height: Dimensions.height20,),
                   BigText(text: "about"),
                   SizedBox(height: Dimensions.height20,),
                   Expanded(
                     child: SingleChildScrollView(
                       child: ExpandableTextWidget(
-                          text:
-                          "One fried rice suit for 1 person.with devilled chicken make with delicious special sources.And chili paste make it even tastier."),
+                          text:product.description!),
                     ),
                   )
                 ],
@@ -114,7 +129,7 @@ class TodayFoodDetail extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, left: Dimensions.width10,right: Dimensions.width10),
 
-              child: BigText(text: "\Rs.450 | Add to cart", color: Colors.white,),
+              child: BigText(text: "\$ ${product.price!} | Add to cart", color: Colors.white,),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular((Dimensions.radius20),),
                 color: Colors.green,

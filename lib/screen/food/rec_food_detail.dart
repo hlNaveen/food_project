@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/widgets/big_text.dart';
 import 'package:food_app/widgets/expanable_text_widget.dart';
-
+import 'package:get/get.dart';
+import '../../routes/route_help.dart';
 import '../../utility/dimention.dart';
 import '../../widgets/app_icon.dart';
 
-class RecomendedFoodDetail extends StatelessWidget {
-  const RecomendedFoodDetail({Key? key}) : super(key: key);
+class RecommendedFoodDetail extends StatelessWidget {
+  const RecommendedFoodDetail({Key? key}) : super(key: key);
 
 
   @override
@@ -15,11 +16,17 @@ class RecomendedFoodDetail extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                  onTap: (){
+                    Get.toNamed(RouteHelp.getInitial());
+                  },
+                  child: AppIcon(icon: Icons.clear),
+                ),
                 AppIcon(icon: Icons.shopping_cart)
               ],
             ),
