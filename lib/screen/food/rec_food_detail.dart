@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/contollers/recomended_pro_controller.dart';
+import 'package:food_app/utility/app_constants.dart';
 import 'package:food_app/widgets/big_text.dart';
 import 'package:food_app/widgets/expanable_text_widget.dart';
 import 'package:get/get.dart';
@@ -7,11 +9,13 @@ import '../../utility/dimention.dart';
 import '../../widgets/app_icon.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommendedFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -33,7 +37,7 @@ class RecommendedFoodDetail extends StatelessWidget {
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(20),
               child: Container(
-                child: Center(child: BigText(size:Dimensions.font26, text: "Chicken Fried Rice")),
+                child: Center(child: BigText(size:Dimensions.font26, text: product.name!)),
                 width: double.maxFinite,
                 padding: EdgeInsets.only(top: 10, bottom: 20),
                 decoration: BoxDecoration(
@@ -52,7 +56,7 @@ class RecommendedFoodDetail extends StatelessWidget {
             backgroundColor: Colors.lightGreen,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset("assets/images/fried-rice.jpeg",
+              background: Image.network(AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -62,7 +66,7 @@ class RecommendedFoodDetail extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  child: ExpandableTextWidget(text: "One fried rice suit for 1 person.with devilled chicken make with delicious special sources.And chili paste make it even tastier."),
+                  child: ExpandableTextWidget(text: product.description!),
                 margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20),
                 )
               ],
@@ -86,7 +90,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 AppIcon(
                     iconSize: Dimensions.font26,
                     iconColor:Colors.black, backgroundColor:Colors.blueGrey, icon: Icons.remove),
-                BigText(text: "\Rs 450 "+" X "+" 0",color: Colors.black,size: Dimensions.font26),
+                BigText(text: "\Rs. ${product.price!} X  0",color: Colors.black,size: Dimensions.font26),
                 AppIcon(iconSize: Dimensions.font26,
                     iconColor:Colors.black, backgroundColor:Colors.blueGrey, icon: Icons.add)
               ],

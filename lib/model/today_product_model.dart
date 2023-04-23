@@ -38,7 +38,7 @@ class ProductModel{
 
   ProductModel(
   {
-    this.id, this.name, this.description, this.price, this.stars, this.img , this.createAt, this.updateAt, this.typeId});
+    required this.id, this.name, this.description, this.price, this.stars, this.img , this.createAt, this.updateAt, this.typeId});
 
   ProductModel.fromJson(Map<String, dynamic> json){
     id = json['id'];

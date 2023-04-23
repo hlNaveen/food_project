@@ -45,13 +45,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         GetBuilder<TodayProductController>(builder:(todayProducts){
           return Container(
             height: Dimensions.pageView,
-
               child: PageView.builder(
                   controller: pageController,
                   itemCount: 4,
                   itemBuilder: (context,position){
                     return _buildPageItem(position,todayProducts.todayProductList[position]);
-                  }),
+                  },),
 
           );
         }),
@@ -85,15 +84,16 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
 
+
         GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
           return recommendedProduct.isLoaded?ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 10,
+              itemCount: recommendedProduct.recommendedProductList.length.compareTo(0),
               itemBuilder: (context, index){
                 return GestureDetector(
                   onTap: (){
-                    Get.toNamed(RouteHelp.getRecommendedFood());
+                    Get.toNamed(RouteHelp.getRecommendedFood(index));
                   },
                   child: Container(
                     margin: EdgeInsets.only(

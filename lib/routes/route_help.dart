@@ -15,7 +15,7 @@ class RouteHelp{
 
   static String getInitial()=>'$initial';
   static String getTodayFood(int pageId)=>'$todayFood?pageId=$pageId';
-  static String getRecommendedFood()=>'$recommendedFood';
+  static String getRecommendedFood(int pageId)=>'$recommendedFood?pageId=$pageId';
 
 
   static List<GetPage> routes=[
@@ -30,7 +30,8 @@ class RouteHelp{
     ),
 
     GetPage(name:recommendedFood, page:(){
-      return RecommendedFoodDetail();
+      var pageId=Get.parameters['pageId'];
+      return RecommendedFoodDetail(pageId:int.parse(pageId!));
     },
         transition: Transition.fade
 

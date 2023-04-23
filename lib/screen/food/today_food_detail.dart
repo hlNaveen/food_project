@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/contollers/cart_controller.dart';
 import 'package:food_app/utility/app_constants.dart';
 import 'package:food_app/widgets/app_column.dart';
 import 'package:food_app/widgets/big_text.dart';
@@ -19,8 +20,8 @@ class TodayFoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var product= Get.find<TodayProductController>().todayProductList[pageId];
-    //print('page id is'+pageId,toString());
-    //print("product name is"+product.name.toString());
+    Get.find<TodayProductController>().initProduct(product,Get.find<CartController>());
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -97,47 +98,61 @@ class TodayFoodDetail extends StatelessWidget {
             ),),
         ],
       ),
-      bottomNavigationBar: Container(
-        height: Dimensions.bottomHeightBar,
-        padding: EdgeInsets.only(top:Dimensions.height30, bottom: Dimensions.height30, left: Dimensions.width10, right: Dimensions.width10),
-        decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(Dimensions.radius20*2),
-              topRight: Radius.circular(Dimensions.radius20*2),
-            )
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, left: Dimensions.width10, right: Dimensions.width10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius20),
-                  color: Colors.white
+      bottomNavigationBar: GetBuilder<TodayProductController>(builder: (todayProduct){
+        return Container(
+          height: Dimensions.bottomHeightBar,
+          padding: EdgeInsets.only(top:Dimensions.height30, bottom: Dimensions.height30, left: Dimensions.width10, right: Dimensions.width10),
+          decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Dimensions.radius20*2),
+                topRight: Radius.circular(Dimensions.radius20*2),
+              )
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, left: Dimensions.width10, right: Dimensions.width10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    color: Colors.white
+                ),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                        onTap: (){
+                          todayProduct.setQuantity(false);
+                        },
+                        child: Icon(Icons.remove, color: Colors.black,)),
+                    SizedBox(width: Dimensions.width20,),
+                    BigText(text: todayProduct.inCartItem.toString()),
+                    SizedBox(width: Dimensions.width20,),
+                    GestureDetector(
+                        onTap: (){
+                          todayProduct.setQuantity(true);
+                        },
+                        child: Icon(Icons.add, color: Colors.black,))
+                  ],
+                ),
               ),
-              child: Row(
-                children: [
-                  Icon(Icons.remove, color: Colors.black,),
-                  SizedBox(width: Dimensions.width20,),
-                  BigText(text: "0"),
-                  SizedBox(width: Dimensions.width20,),
-                  Icon(Icons.add, color: Colors.black,),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, left: Dimensions.width10,right: Dimensions.width10),
+              Container(
+                padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, left: Dimensions.width10,right: Dimensions.width10),
 
-              child: BigText(text: "\$ ${product.price!} | Add to cart", color: Colors.white,),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular((Dimensions.radius20),),
-                color: Colors.green,
+                child: GestureDetector(
+                  onTap: (){
+                    todayProduct.addItem(product);
+                  },
+                    child: BigText(text: "\Rs. ${product.price!} | Add to cart", color: Colors.white,)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular((Dimensions.radius20),),
+                  color: Colors.green,
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      },),
     );
   }
 }
